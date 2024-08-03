@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body{
+    background-color: #E5E5E5;
+    font-size: 1 rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  display: flex;
+
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: sans-serif;
+}
+
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+}
+
+textarea {
+    border: 0px;
+    margin:2px;
+    resize: none;
+    justify-content: space-around;
+}
+
+.textInstruction {
+    font-weight:400;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    display: block;
+    color:#495057;
+}
+
+.btn {
+  border-radius: 0.4rem;
+  padding: 0.75%;
+  margin: 1%;
+  border: 1px #0A3871 solid;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #0A3871;
+  color: #FFF;
+}
+
+.btn-secondary {
+  background-color: #E5E5E5;
+  color: #0A3871;
+}

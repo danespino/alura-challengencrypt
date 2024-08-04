@@ -70,7 +70,7 @@ textarea {
 
 .btn {
     border-radius: 0.4rem;
-    padding: 0.75%;
+    padding: 1.75%;
     margin: 1%;
     border: 1px #0A3871 solid;
     cursor: pointer;
@@ -100,4 +100,14 @@ textarea {
     border:1px #CECECE solid;
     width: 75%;
     height: auto;
+}
+
+@media screen, (min-width:481px) and (max-width:768px) {
+    .btn {
+        padding: 1%;
+    }
+}
+
+@media screen, (min-width:769px) {
+    
 }

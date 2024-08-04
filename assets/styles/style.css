@@ -37,6 +37,19 @@ footer:hover {
     font-weight: 600;
 }
 
+footer a:link {
+    margin:0 0.5% 0 0.5%;
+    font-weight: 800;
+    font-size: 1rem;
+    color:#E5E5E5;
+    text-decoration: none;
+}
+
+footer a:hover {
+    font-size: 1.25rem;
+    color: #FFF;
+}
+
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
     hyphens: auto;
@@ -73,7 +86,7 @@ textarea {
 
 .topBar img {
     display: flex;
-    max-width: 18rem;
+    max-width: 15rem;
     height: auto;
 }
 
@@ -151,7 +164,9 @@ textarea {
 }
 
 @media (min-width:769px) and (max-width:1280px) {
-    
+    .topBar img {
+        margin-left:-1%;
+    }
 }
 
 @media (min-width:1281px) {
@@ -160,22 +175,23 @@ textarea {
     }
 
     main div {
-        width: 60%;
+        width: 65%;
         gap: 2px;
         margin: auto;
     }
 
     #secretBox {
-        width: 40%;
+        width: 30%;
         justify-content: center;
-        height: 100vh;
-        margin: 1%;
+        height: 92vh;
+        margin: 2%;
         border: 1px #000 solid;
     }
 
     #secretBox img {
         display: block;
         margin: auto;
+        margin-bottom: 5%;
         width: 40%;
         height: auto;
     }

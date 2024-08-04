@@ -35,4 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const decryptedText = decodeText(textToDecrypt);
         secretBox.innerText = decryptedText;
     });
+
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const scrollMaxPosition = document.body.scrollHeight - windowHeight;
+        const animationPoint = scrollMaxPosition * 0.7;
+        console.log(scrollPosition, animationPoint);
+        const footer = document.getElementById('footer');
+
+        if (scrollPosition > animationPoint) {
+            footer.style.opacity = "1";
+        } else {
+            footer.style.opacity = "0";
+        }
+    });
 });

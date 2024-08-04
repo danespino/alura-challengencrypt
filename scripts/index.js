@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
         const scrollMaxPosition = document.body.scrollHeight - windowHeight;
-        const animationPoint = scrollMaxPosition * 0.7;
+        const animationPoint = scrollMaxPosition * 0.8;
         console.log(scrollPosition, animationPoint);
         const footer = document.getElementById('footer');
 

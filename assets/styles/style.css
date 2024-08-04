@@ -12,7 +12,8 @@ body{
 main {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-items: center;
+    text-align: center;
 }
 
 footer {
@@ -26,15 +27,36 @@ p, h1, h2, h3, h4, h5, h6 {
     font-family: sans-serif;
 }
 
-.antialiased {
-    -webkit-font-smoothing: antialiased;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: #000 2px 2px 4px;
+    display: inline;
 }
 
 textarea {
+    width: 75%;
     border: 0px;
     margin:2px;
     resize: none;
     justify-content: space-around;
+    color: #0A3871;
+    font-size: 2rem;
+}
+
+.antialiased {
+    -webkit-font-smoothing: antialiased;
+}
+
+.topBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topBar img {
+    display: flex;
+    max-width: 20rem;
+    height: auto;
 }
 
 .textInstruction {
@@ -52,6 +74,7 @@ textarea {
     margin: 1%;
     border: 1px #0A3871 solid;
     cursor: pointer;
+    font-weight: 700;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
@@ -67,7 +90,7 @@ textarea {
 
 .disabled {
     cursor: not-allowed;
-    opacity: 50;
+    opacity: 50%;
 }
 
 .secretBox {
@@ -75,7 +98,6 @@ textarea {
     flex-direction: column;
     background-color: #FFF;
     border:1px #CECECE solid;
-    max-width: 48%;
-    
+    width: 75%;
     height: auto;
 }

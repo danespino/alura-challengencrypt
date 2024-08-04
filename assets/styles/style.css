@@ -73,7 +73,7 @@ textarea {
 
 .topBar img {
     display: flex;
-    max-width: 20rem;
+    max-width: 18rem;
     height: auto;
 }
 
@@ -91,13 +91,14 @@ textarea {
 }
 
 .btn {
-    border-radius: 0.4rem;
-    padding: 1.75%;
+    border-radius: 0.75rem;
+    padding: 1.75% 3%;
     margin: 1%;
     border: 1px #0A3871 solid;
     cursor: pointer;
     font-weight: 700;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 40%;
 }
 
 .btn-primary {
@@ -154,6 +155,24 @@ textarea {
 }
 
 @media (min-width:1281px) {
+    main {
+        flex-direction: row;
+    }
+
+    main div {
+        width: 60%;
+        gap: 2px;
+        margin: auto;
+    }
+
+    #secretBox {
+        width: 40%;
+        justify-content: center;
+        height: 100vh;
+        margin: 1%;
+        border: 1px #000 solid;
+    }
+
     #secretBox img {
         display: block;
         margin: auto;

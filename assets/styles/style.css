@@ -1,3 +1,4 @@
+@import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 *, *::before, *::after {
@@ -6,17 +7,52 @@
 
 body{
     background-color: #E5E5E5;
-    font-size: 1 rem;
+    font-size: 1rem;
 }
 
 main {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-items: center;
+    text-align: center;
 }
 
 footer {
     display: flex;
+    justify-content: center;
+    background-color: #252424;
+    position: sticky;
+    bottom: 0px;
+    margin-top: 2%;
+    padding:1% 0 1% 0;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color:#E5E5E5;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+footer:hover {
+    opacity: 1;
+    font-weight: 600;
+}
+
+footer a:link {
+    margin:0 0.5% 0 0.5%;
+    font-weight: 800;
+    font-size: 1rem;
+    color:#E5E5E5;
+    text-decoration: none;
+}
+
+footer a:hover {
+    font-size: 1.25rem;
+    color: #FFF;
+}
+
+footer a:visited {
+    color: #CCC;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -26,15 +62,41 @@ p, h1, h2, h3, h4, h5, h6 {
     font-family: sans-serif;
 }
 
-.antialiased {
-    -webkit-font-smoothing: antialiased;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: #000 2px 2px 4px;
+    display: inline;
 }
 
 textarea {
+    width: 75%;
     border: 0px;
     margin:2px;
     resize: none;
     justify-content: space-around;
+    color: #0A3871;
+    font-size: 2rem;
+    background-color: transparent;
+}
+
+.antialiased {
+    -webkit-font-smoothing: antialiased;
+}
+
+.topBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.topBar img {
+    display: flex;
+    max-width: 15rem;
+    height: auto;
+}
+
+.workArea {
+    margin-bottom: 2%;
 }
 
 .textInstruction {
@@ -44,15 +106,22 @@ textarea {
     line-height: 1.25rem;
     display: block;
     color:#495057;
+    margin:2% 0 2% 0;
 }
 
 .btn {
-    border-radius: 0.4rem;
-    padding: 0.75%;
+    border-radius: 0.75rem;
+    padding: 1.75% 3%;
     margin: 1%;
     border: 1px #0A3871 solid;
     cursor: pointer;
+    font-weight: 700;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 40%;
+}
+
+.btn i {
+    margin-right: 4%;
 }
 
 .btn-primary {
@@ -67,15 +136,101 @@ textarea {
 
 .disabled {
     cursor: not-allowed;
-    opacity: 50;
+    opacity: 50%;
 }
 
-.secretBox {
-    display: flex;
-    flex-direction: column;
-    background-color: #FFF;
-    border:1px #CECECE solid;
-    max-width: 48%;
-    
-    height: auto;
+.clearMsgBtn {
+    position: relative;
+    top:0px;
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+.copyMsgDiv {
+    position: absolute;
+    bottom:2%;
+    left: 4.25%;
+    width: 90%;
+}
+
+.copyMsgDiv button {
+    width: 100%;
+    cursor: pointer;
+}
+
+#secretBox {
+    background-color:#FFF;
+    width: 75%;
+    margin:auto;
+    padding:1.5%;
+    border-radius: 1.2rem;
+    box-shadow: 0 12px 20px 0 rgba(0,0,0,0.2), 0 12px 26px 0 rgba(0,0,0,0.19);
+    justify-content: center;
+    line-height: 2rem;
+    position: relative;
+}
+
+#secretBox img {
+    display: none;
+}
+
+#secretBox span {
+    line-height: 2rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Inter', sans-serif;
+}
+
+#secretBox p {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+#secretBox button {
+    display: block;
+}
+
+#secretDiv {
+    margin-bottom: 10%;
+}
+
+@media (min-width:481px) and (max-width:768px) {
+    .btn {
+        padding: 1%;
+    }
+}
+
+@media (min-width:769px) and (max-width:1280px) {
+    .topBar img {
+        margin-left:-1%;
+    }
+}
+
+@media (min-width:1281px) {
+    main {
+        flex-direction: row;
+    }
+
+    main div {
+        width: 65%;
+        gap: 2px;
+        margin: auto;
+    }
+
+    #secretBox {
+        width: 30%;
+        justify-content: center;
+        height: 92vh;
+        margin: 2%;
+        border: 1px #000 solid;
+    }
+
+    #secretBox img {
+        display: block;
+        margin: auto;
+        margin-bottom: 5%;
+        width: 40%;
+        height: auto;
+    }
 }

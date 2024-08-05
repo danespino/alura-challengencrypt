@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>.:: Encriptador de Texto Alura - Dan Espino ::.</title>
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="scripts/index.js" async></script>
 </head>
 <body>
     <main>
         <div>
-            <textarea name="encrypTxtBox" id="encrypTxtBox" cols="30" rows="10"></textarea>
-            <span class="textInstruction">Solo letras min&uacute;sculas y sin acentos</span>
-        </div>
-        <div>
-            <input id="encryptBtn" type="button" class="btn btn-primary" value="Encrypt">
-            <input id="decryptBtn" type="button" class="btn btn-secondary" value="Decrypt">
+            <div class="topBar">
+                <img src="assets/images/DE.png" alt="Dan Espino Logo">
+                <h1>Alura Encrypter</h1>
+            </div>
+            <div class="workArea">
+                <textarea name="encrypTxtBox" id="encrypTxtBox" cols="30" rows="10" placeholder="Inserte tu texto aqu&iacute;"></textarea>
+                <span class="textInstruction"><i class="fa-solid fa-circle-exclamation"></i> Solo letras min&uacute;sculas y sin acentos</span>
+                <input id="encryptBtn" type="button" class="btn btn-primary" value="Encriptar">
+                <input id="decryptBtn" type="button" class="btn btn-secondary" value="Desencriptar">
+            </div>
         </div>
         <div id="secretBox">
-            
+            <button id="clearMsgBtn" name="copyMsgBtn" class="btn btn-primary clearMsgBtn"><i class="fa-solid fa-eraser"></i>Clear Mensaje</button>
+            <div id="secretDiv">
+                <img src="assets/images/detective-searching.png" alt="Searching your message">
+                <span>Ning&uacute;n texto fue encontrado</span> 
+                <p>Ingresa el texto que desees encriptar o desencriptar</p>
+            </div>
+            <div class="copyMsgDiv">
+                <button id="copyMsgBtn" name="copyMsgBtn" class="btn btn-secondary"><i class="fa-regular fa-clone"></i>Copiar Mensaje</button>
+            </div>
         </div>
     </main>
-    <footer>
-        Este encriptador de texto fue elaborado por Dan Espino
+    <footer id="footer">
+        Este encriptador de texto fue elaborado por <a href="https://danespino.github.io" target="_blank">Dan Espino</a> 
     </footer>
     <script defer src="scripts/encrypt.js"></script>
 </body>

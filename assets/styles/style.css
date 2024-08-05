@@ -1,3 +1,4 @@
+@import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 *, *::before, *::after {
@@ -48,6 +49,10 @@ footer a:link {
 footer a:hover {
     font-size: 1.25rem;
     color: #FFF;
+}
+
+footer a:visited {
+    color: #CCC;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -101,6 +106,7 @@ textarea {
     line-height: 1.25rem;
     display: block;
     color:#495057;
+    margin:2% 0 2% 0;
 }
 
 .btn {
@@ -112,6 +118,10 @@ textarea {
     font-weight: 700;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     width: 40%;
+}
+
+.btn i {
+    margin-right: 4%;
 }
 
 .btn-primary {
@@ -129,6 +139,25 @@ textarea {
     opacity: 50%;
 }
 
+.clearMsgBtn {
+    position: relative;
+    top:0px;
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+.copyMsgDiv {
+    position: absolute;
+    bottom:2%;
+    left: 4.25%;
+    width: 90%;
+}
+
+.copyMsgDiv button {
+    width: 100%;
+    cursor: pointer;
+}
+
 #secretBox {
     background-color:#FFF;
     width: 75%;
@@ -138,6 +167,7 @@ textarea {
     box-shadow: 0 12px 20px 0 rgba(0,0,0,0.2), 0 12px 26px 0 rgba(0,0,0,0.19);
     justify-content: center;
     line-height: 2rem;
+    position: relative;
 }
 
 #secretBox img {
@@ -155,6 +185,14 @@ textarea {
     line-height: 1.5rem;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
+}
+
+#secretBox button {
+    display: block;
+}
+
+#secretDiv {
+    margin-bottom: 10%;
 }
 
 @media (min-width:481px) and (max-width:768px) {

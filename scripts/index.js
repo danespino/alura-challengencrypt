@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const secretBox = document.getElementById("secretDiv");
     const clearMsgBtn = document.getElementById("clearMsgBtn");
     const copyMsgBtn = document.getElementById("copyMsgBtn");
+    const secretDivDefault = document.getElementById("secretDiv").innerHTML;
     
     encryptBtn.disabled = true;
     decryptBtn.disabled = true;
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     clearMsgBtn.addEventListener('click', () => {
         textInput.value = "";
-        secretDiv.innerText = "";
+        secretDiv.innerHTML = secretDivDefault;
         clearMsgBtn.style = "display: none";
         copyMsgBtn.style = "display: none";
     });

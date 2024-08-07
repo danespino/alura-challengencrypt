@@ -158,6 +158,40 @@ textarea {
     cursor: pointer;
 }
 
+.alertBox {
+    position:absolute;
+    top: 10px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 1rem;
+    width: 50%;
+    text-align: center;
+    z-index: 40;
+    display: none;
+    animation: fadeOut 3s;
+}
+
+.success{
+    display: inline;
+    background-color: rgb(23, 85, 23);
+}
+
+.error {
+    display: inline;
+    background-color: rgb(149, 4, 4);
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    50% { opacity: 0.65; }
+  100% { opacity: 0; }
+}
+
 #secretBox {
     background-color:#FFF;
     width: 75%;

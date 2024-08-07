@@ -53,6 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
         copyMsgBtn.style = "display: none";
     });
 
+    copyMsgBtn.addEventListener('click', () => {
+        const textToCopy = secretBox.innerText;
+        copyMsgToClipboard(textToCopy);
+    });
+
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
@@ -67,3 +72,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+const copyMsgToClipboard = async (message) => {
+    const textToCopy = message;
+    alertMsgDiv = document.createElement('div');
+    alertMsgDiv.setAttribute("id", "alertMessageDiv");
+    try {
+        await navigator.clipboard.writeText(textToCopy);
+        alertMsgDiv.setAttribute("class", "alertBox success");
+        alertMsgDiv.innerText = "Texto copiado con exito!";
+    } catch (err) {
+        console.error('Failed to copy text to the clipboard. Error: ', err);
+        alertMsgDiv.classList.add = "alertBox error";
+        alertMsgDiv.innerText = "Error en la copia del texto al portapapeles!";
+    }
+    document.body.prepend(alertMsgDiv);
+    setTimeout(() => {
+        alertMsgDiv.remove();
+    }, 3000);
+}

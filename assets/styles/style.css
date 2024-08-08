@@ -26,7 +26,7 @@
     --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
 }
 
-body{
+body {
     background-color: var(--bg-color);
     font-size: 1rem;
 }
@@ -85,8 +85,9 @@ p, h1, h2, h3, h4, h5, h6 {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Courier New', Courier, monospace;
-    text-shadow: var(--title-txtcolor) 2px 2px 4px;
+    text-shadow: var(--footer-bgcolor) 2px 2px 4px;
     display: inline;
+    color: var(--title-txtcolor);
 }
 
 textarea {
@@ -248,6 +249,29 @@ textarea {
 
 #secretDiv {
     margin-bottom: 10%;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #090909;
+        --title-txtcolor: #d4d3d3;
+        --primary-color: #cfd6dd;
+        --secondary-color: #86898b;
+        --terciary-color: #FFF;
+
+        --success-color: rgb(3, 182, 3);
+        --error-color: rgb(207, 6, 6);
+
+        --btn-primary-bgcolor: #727579;
+        --btn-primary-text: #FFF;
+        --btn-secondary-bgcolor: #E5E5E5;
+        --btn-secondary-text: #090909;
+
+        --footer-bgcolor : #423f3f;
+        --footer-textcolor: #E5E5E5;
+        --footer-lnkhcolor: #FFF;       /*  Hover Color for Links  */
+        --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
+    }
 }
 
 @media (min-width:481px) and (max-width:768px) {

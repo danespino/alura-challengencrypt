@@ -1,3 +1,9 @@
+window.onload = () => {
+    const currentTheme = getPreference('mode');
+    document.firstElementChild.setAttribute('data-theme', currentTheme);
+    currentTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const textInput = document.getElementById("encrypTxtBox");
     const encryptBtn = document.getElementById("encryptBtn");
@@ -6,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearMsgBtn = document.getElementById("clearMsgBtn");
     const copyMsgBtn = document.getElementById("copyMsgBtn");
     const secretDivDefault = document.getElementById("secretDiv").innerHTML;
+    const darkModeBtn = document.getElementById("darkSwitch");
+    const theme = {
+        name: getThemeName(),
+        themeMode: getThemeModePreference()
+    }
     
     encryptBtn.disabled = true;
     decryptBtn.disabled = true;
@@ -58,6 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
         copyMsgToClipboard(textToCopy);
     });
 
+    darkModeBtn.addEventListener('click', () => {
+        const currentTheme = getPreference('mode');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setPreference('mode', newTheme);
+        document.firstElementChild.setAttribute('data-theme', newTheme);
+        theme.themeMode = newTheme;
+        newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
+    });
+
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
@@ -90,4 +110,31 @@ const copyMsgToClipboard = async (message) => {
     setTimeout(() => {
         alertMsgDiv.remove();
     }, 3000);
+}
+
+const setPreference = (prop_name, prop_value) => {
+    localStorage.setItem(prop_name, prop_value);
+    return true;
+}
+
+const getPreference = (prop_name) => {
+    return localStorage.getItem(prop_name);
+}
+
+const getThemeModePreference = () => {
+    let themeMode = getPreference('mode');
+
+    if(themeMode === null) {
+        isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        isDarkMode ? setPreference('mode', 'dark') : setPreference('mode', 'light');
+        return isDarkMode ? 'dark' : 'light';
+    } else {
+        return themeMode;
+    }
+}
+
+const getThemeName = () => {
+    const themeSelected = getPreference('theme') ?? 'default';
+    setPreference('theme', themeSelected);
+    return themeSelected;
 }

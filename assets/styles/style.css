@@ -5,8 +5,56 @@
     box-sizing: border-box;
 }
 
-body{
-    background-color: #E5E5E5;
+:root {
+    --bg-color: #E5E5E5;
+    --bg-switch: #0981ea;
+    --sun-slider: rgb(255, 205, 4);
+    --title-txtcolor: #000;
+    --primary-color: #0A3871;
+    --secondary-color: #495057;
+    --terciary-color: #FFF;
+
+    --success-color: rgb(23, 85, 23);
+    --error-color: rgb(149, 4, 4);
+
+    --btn-primary-bgcolor: #0A3871;
+    --btn-primary-text: #FFF;
+    --btn-secondary-bgcolor: #E5E5E5;
+    --btn-secondary-text: #0A3871;
+
+    --footer-bgcolor : #252424;
+    --footer-textcolor: #E5E5E5;
+    --footer-lnkhcolor: #FFF;       /*  Hover Color for Links  */
+    --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
+}
+
+[data-theme="dark"] {
+    --bg-color: #090909;
+    --bg-switch: #242226;
+    --sun-slider: rgb(255, 205, 4);
+
+    --title-txtcolor: #d4d3d3;
+    --primary-color: #cfd6dd;
+    --secondary-color: #86898b;
+    --terciary-color: #FFF;
+
+    --success-color: rgb(3, 182, 3);
+    --error-color: rgb(207, 6, 6);
+
+    --btn-primary-bgcolor: #727579;
+    --btn-primary-text: #FFF;
+    --btn-secondary-bgcolor: #E5E5E5;
+    --btn-secondary-text: #090909;
+    
+    --footer-bgcolor : #423f3f;
+    --footer-textcolor: #E5E5E5;
+    --footer-lnkhcolor: #FFF;       /*  Hover Color for Links  */
+    --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
+}
+
+body {
+    background-color: var(--bg-color);
+    transition: all 600ms;          /* Adds smooth transition in the background instead of a flash */
     font-size: 1rem;
 }
 
@@ -20,7 +68,7 @@ main {
 footer {
     display: flex;
     justify-content: center;
-    background-color: #252424;
+    background-color: var(--footer-bgcolor);
     position: sticky;
     bottom: 0px;
     margin-top: 2%;
@@ -28,7 +76,7 @@ footer {
     line-height: 1.5rem;
     font-size: 1rem;
     font-weight: 500;
-    color:#E5E5E5;
+    color: var(--footer-textcolor);
     opacity: 0;
     transition: opacity 0.5s ease;
 }
@@ -42,17 +90,17 @@ footer a:link {
     margin:0 0.5% 0 0.5%;
     font-weight: 800;
     font-size: 1rem;
-    color:#E5E5E5;
+    color:var(--footer-textcolor);
     text-decoration: none;
 }
 
 footer a:hover {
     font-size: 1.25rem;
-    color: #FFF;
+    color: var(--footer-lnkhcolor);
 }
 
 footer a:visited {
-    color: #CCC;
+    color: var(--footer-lnkvcolor);
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -64,8 +112,9 @@ p, h1, h2, h3, h4, h5, h6 {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Courier New', Courier, monospace;
-    text-shadow: #000 2px 2px 4px;
+    text-shadow: var(--footer-bgcolor) 2px 2px 4px;
     display: inline;
+    color: var(--title-txtcolor);
 }
 
 textarea {
@@ -74,13 +123,79 @@ textarea {
     margin:2px;
     resize: none;
     justify-content: space-around;
-    color: #0A3871;
+    color: var(--primary-color);
     font-size: 2rem;
     background-color: transparent;
 }
 
 .antialiased {
     -webkit-font-smoothing: antialiased;
+}
+
+.actionBar {
+    display: flex;
+    justify-content: end;
+    margin: 2% 2% 0.5%;
+    gap: 1%;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    background-color: var(--bg-switch);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    transition: all 400ms;
+    cursor: pointer;
+}
+
+.slider::before{
+    position: absolute;
+    content: "";
+    background-color: var(--sun-slider);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    left: 5px;
+    bottom: 5px;
+    transition: 400ms;
+}
+
+.slider::after {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    background-color: var(--bg-switch);
+    border-radius: 50%;
+    left: -26px;
+    bottom: 4px;
+    transition: 400ms;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(40px);
+}
+
+.switch input:checked + .slider::after {
+    transform: translateX(60px);
 }
 
 .topBar {
@@ -105,7 +220,7 @@ textarea {
     font-size: 0.75rem;
     line-height: 1.25rem;
     display: block;
-    color:#495057;
+    color:var(--secondary-color);
     margin:2% 0 2% 0;
 }
 
@@ -113,7 +228,7 @@ textarea {
     border-radius: 0.75rem;
     padding: 1.75% 3%;
     margin: 1%;
-    border: 1px #0A3871 solid;
+    border: 1px var(--btn-primary-bgcolor) solid;
     cursor: pointer;
     font-weight: 700;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -125,13 +240,13 @@ textarea {
 }
 
 .btn-primary {
-    background-color: #0A3871;
-    color: #FFF;
+    background-color: var(--btn-primary-bgcolor);
+    color: var(--btn-primary-text);
 }
 
 .btn-secondary {
-    background-color: #E5E5E5;
-    color: #0A3871;
+    background-color: var(--btn-secondary-bgcolor);
+    color: var(--btn-secondary-text);
 }
 
 .disabled {
@@ -165,7 +280,7 @@ textarea {
     right: 0px;
     margin-left: auto;
     margin-right: auto;
-    color: #FFF;
+    color: var(--terciary-color);
     font-weight: 600;
     font-size: 0.75rem;
     padding: 1rem;
@@ -178,12 +293,12 @@ textarea {
 
 .success{
     display: inline;
-    background-color: rgb(23, 85, 23);
+    background-color: var(--success-color);
 }
 
 .error {
     display: inline;
-    background-color: rgb(149, 4, 4);
+    background-color: var(--error-color);
 }
 
 @keyframes fadeOut {
@@ -193,7 +308,7 @@ textarea {
 }
 
 #secretBox {
-    background-color:#FFF;
+    background-color:var(--terciary-color);
     width: 75%;
     margin:auto;
     padding:1.5%;
@@ -229,6 +344,29 @@ textarea {
     margin-bottom: 10%;
 }
 
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #090909;
+        --title-txtcolor: #d4d3d3;
+        --primary-color: #cfd6dd;
+        --secondary-color: #86898b;
+        --terciary-color: #FFF;
+
+        --success-color: rgb(3, 182, 3);
+        --error-color: rgb(207, 6, 6);
+
+        --btn-primary-bgcolor: #727579;
+        --btn-primary-text: #FFF;
+        --btn-secondary-bgcolor: #E5E5E5;
+        --btn-secondary-text: #090909;
+
+        --footer-bgcolor : #423f3f;
+        --footer-textcolor: #E5E5E5;
+        --footer-lnkhcolor: #FFF;       
+        --footer-lnkvcolor: #CCC;       
+    }
+} */
+
 @media (min-width:481px) and (max-width:768px) {
     .btn {
         padding: 1%;
@@ -257,7 +395,7 @@ textarea {
         justify-content: center;
         height: 92vh;
         margin: 2%;
-        border: 1px #000 solid;
+        border: 1px var(--title-txtcolor) solid;
     }
 
     #secretBox img {
@@ -268,3 +406,4 @@ textarea {
         height: auto;
     }
 }
+

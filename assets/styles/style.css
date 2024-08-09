@@ -26,6 +26,27 @@
     --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
 }
 
+[data-theme="dark"] {
+    --bg-color: #090909;
+    --title-txtcolor: #d4d3d3;
+    --primary-color: #cfd6dd;
+    --secondary-color: #86898b;
+    --terciary-color: #FFF;
+
+    --success-color: rgb(3, 182, 3);
+    --error-color: rgb(207, 6, 6);
+
+    --btn-primary-bgcolor: #727579;
+    --btn-primary-text: #FFF;
+    --btn-secondary-bgcolor: #E5E5E5;
+    --btn-secondary-text: #090909;
+    
+    --footer-bgcolor : #423f3f;
+    --footer-textcolor: #E5E5E5;
+    --footer-lnkhcolor: #FFF;       /*  Hover Color for Links  */
+    --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
+}
+
 body {
     background-color: var(--bg-color);
     font-size: 1rem;
@@ -103,6 +124,13 @@ textarea {
 
 .antialiased {
     -webkit-font-smoothing: antialiased;
+}
+
+.actionBar {
+    display: flex;
+    justify-content: end;
+    margin: 2% 2% 0.5%;
+    gap: 1%;
 }
 
 .topBar {
@@ -251,7 +279,7 @@ textarea {
     margin-bottom: 10%;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #090909;
         --title-txtcolor: #d4d3d3;
@@ -269,10 +297,10 @@ textarea {
 
         --footer-bgcolor : #423f3f;
         --footer-textcolor: #E5E5E5;
-        --footer-lnkhcolor: #FFF;       /*  Hover Color for Links  */
-        --footer-lnkvcolor: #CCC;       /*  Color for Visited Links  */
+        --footer-lnkhcolor: #FFF;       
+        --footer-lnkvcolor: #CCC;       
     }
-}
+} */
 
 @media (min-width:481px) and (max-width:768px) {
     .btn {

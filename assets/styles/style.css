@@ -7,6 +7,8 @@
 
 :root {
     --bg-color: #E5E5E5;
+    --bg-switch: #0981ea;
+    --sun-slider: rgb(255, 205, 4);
     --title-txtcolor: #000;
     --primary-color: #0A3871;
     --secondary-color: #495057;
@@ -28,6 +30,9 @@
 
 [data-theme="dark"] {
     --bg-color: #090909;
+    --bg-switch: #242226;
+    --sun-slider: rgb(255, 205, 4);
+
     --title-txtcolor: #d4d3d3;
     --primary-color: #cfd6dd;
     --secondary-color: #86898b;
@@ -49,6 +54,7 @@
 
 body {
     background-color: var(--bg-color);
+    transition: all 600ms;          /* Adds smooth transition in the background instead of a flash */
     font-size: 1rem;
 }
 
@@ -131,6 +137,65 @@ textarea {
     justify-content: end;
     margin: 2% 2% 0.5%;
     gap: 1%;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    background-color: var(--bg-switch);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    transition: all 400ms;
+    cursor: pointer;
+}
+
+.slider::before{
+    position: absolute;
+    content: "";
+    background-color: var(--sun-slider);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    left: 5px;
+    bottom: 5px;
+    transition: 400ms;
+}
+
+.slider::after {
+    position: absolute;
+    content: "";
+    height: 30px;
+    width: 30px;
+    background-color: var(--bg-switch);
+    border-radius: 50%;
+    left: -26px;
+    bottom: 4px;
+    transition: 400ms;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(40px);
+}
+
+.switch input:checked + .slider::after {
+    transform: translateX(60px);
 }
 
 .topBar {

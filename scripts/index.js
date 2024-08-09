@@ -1,6 +1,7 @@
 window.onload = () => {
     const currentTheme = getPreference('mode');
     document.firstElementChild.setAttribute('data-theme', currentTheme);
+    currentTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setPreference('mode', newTheme);
         document.firstElementChild.setAttribute('data-theme', newTheme);
         theme.themeMode = newTheme;
+        newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
     });
 
     window.addEventListener('scroll', () => {

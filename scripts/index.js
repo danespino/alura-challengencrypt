@@ -1,7 +1,7 @@
 window.onload = () => {
-    const currentTheme = getPreference('mode');
+    const currentTheme = getThemeModePreference();
     document.firstElementChild.setAttribute('data-theme', currentTheme);
-    currentTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
+    showSwitchStatus(currentTheme);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -137,4 +137,19 @@ const getThemeName = () => {
     const themeSelected = getPreference('theme') ?? 'default';
     setPreference('theme', themeSelected);
     return themeSelected;
+}
+
+const showSwitchStatus = (currentTheme) => {
+    const switchBtn = document.getElementById("darkSwitch");
+    let strSwitch = "";
+
+    if(currentTheme === 'dark') {
+        switchBtn.checked = true;
+        strSwitch = "Cambiar a modo oscuro";
+    } else {
+        strSwitch = "Cambiar a modo claro";
+        switchBtn.checked = false;
+    } 
+    document.getElementsByClassName('slider')[0].setAttribute("title", strSwitch);
+    return true;
 }

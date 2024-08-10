@@ -128,12 +128,18 @@ textarea {
     background-color: transparent;
 }
 
+select {
+    padding: 5% 3%;
+    font-weight: 600;
+}
+
 .antialiased {
     -webkit-font-smoothing: antialiased;
 }
 
 .actionBar {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: end;
     margin: 2% 2% 0.5%;
     gap: 1%;
@@ -208,6 +214,14 @@ textarea {
     display: flex;
     max-width: 15rem;
     height: auto;
+}
+
+.langSwitcher {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 1% 0 1%;
+    color: var(--primary-color);
 }
 
 .workArea {

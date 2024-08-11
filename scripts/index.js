@@ -1,8 +1,25 @@
 window.onload = () => {
+    document.body.style.visibility = "visible";
     const currentTheme = getThemeModePreference();
     document.firstElementChild.setAttribute('data-theme', currentTheme);
     showSwitchStatus(currentTheme);
 }
+
+document.addEventListener('readystatechange', () => {
+    const loaderDiv = document.getElementById("loader");
+    const workArea = document.getElementById("alura-encoder");
+    const currentTheme = getThemeModePreference();
+    loaderDiv.setAttribute('data-theme', currentTheme);
+
+    if (document.readyState !== 'complete') {
+        workArea.style = "display: none";
+        loaderDiv.style = "display: flex";
+    } else {
+        workArea.style = "display: flex";
+        document.body.style = "overflow: auto";
+        loaderDiv.style = "display: none";
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const textInput = document.getElementById("encrypTxtBox");
@@ -13,11 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const copyMsgBtn = document.getElementById("copyMsgBtn");
     const secretDivDefault = document.getElementById("secretDiv").innerHTML;
     const darkModeBtn = document.getElementById("darkSwitch");
+    const loaderDiv = document.getElementById("loader");
     const theme = {
         name: getThemeName(),
         themeMode: getThemeModePreference()
     }
-    
+    loaderDiv.style = "display: flex";
     encryptBtn.disabled = true;
     decryptBtn.disabled = true;
     encryptBtn.classList.add("disabled");

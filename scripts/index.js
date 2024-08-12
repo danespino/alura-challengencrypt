@@ -31,10 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const secretDivDefault = document.getElementById("secretDiv").innerHTML;
     const darkModeBtn = document.getElementById("darkSwitch");
     const loaderDiv = document.getElementById("loader");
+    const langSwitcher = document.getElementById("langBar");
     const theme = {
         name: getThemeName(),
         themeMode: getThemeModePreference()
     }
+    
     loaderDiv.style = "display: flex";
     encryptBtn.disabled = true;
     decryptBtn.disabled = true;
@@ -43,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearMsgBtn.style = "display: none";
     copyMsgBtn.style = "display: none";
     textInput.value = "";
+    listAvailableLanguages();
     
     textInput.addEventListener("input", () => {
         if (textInput.value.trim() === "") {
@@ -94,6 +97,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.firstElementChild.setAttribute('data-theme', newTheme);
         theme.themeMode = newTheme;
         newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
+    });
+
+    langSwitcher.addEventListener('change', (event) => {
+        const selectedLang = event.target.value;
+        setPreference('lang', selectedLang);
     });
 
     window.addEventListener('scroll', () => {
@@ -169,5 +177,27 @@ const showSwitchStatus = (currentTheme) => {
         switchBtn.checked = false;
     } 
     document.getElementsByClassName('slider')[0].setAttribute("title", strSwitch);
+    return true;
+}
+
+const listAvailableLanguages = () => {
+    const languages = [
+        {name: "English", code: "en"},
+        {name: "Spanish", code: "es"}
+    ];
+
+    const preferedLang = getPreference('lang') ?? 'es';
+    const langOptionSelect = Array.from(document.getElementById("langBar").options).map(option => option.value);
+
+    languages.map((language) => {
+        if(langOptionSelect.includes(language.code)) return;
+
+        const option = document.createElement("option");
+        option.value = language.code;
+        option.text = language.name;
+        option.selected = language.code === preferedLang;
+        document.getElementById("langBar").options.add(option);
+    });
+
     return true;
 }

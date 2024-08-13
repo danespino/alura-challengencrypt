@@ -237,6 +237,10 @@ select {
     line-height: 1.25rem;
     display: block;
     color:var(--secondary-color);
+    
+}
+
+.textInstruction span {
     margin:2% 0 2% 0;
 }
 

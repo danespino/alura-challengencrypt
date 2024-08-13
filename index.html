@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.:: Encriptador de Texto Alura - Dan Espino ::.</title>
+    <title data-i18n-handler="website-title">.:: Encriptador de Texto Alura - Dan Espino ::.</title>
     <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="scripts/index.js" async></script>
@@ -11,17 +11,17 @@
 <body>
     <div id="loader">
         <img src="assets/images/DEsign.png" width="400" height="170" alt="Dan Espino Logo">
-        <span>Cargando</span>
+        <span data-i18n-handler="loadingDefaultStatus">Cargando</span>
     </div>
     <div id="alura-encoder">
         <div class="actionBar">
             <label class="switch">
                 <input name="darkSwitch" id="darkSwitch" type="checkbox">
-                <div class="slider" title=""></div>
+                <div class="slider" data-i18n-handler="darkModeSwitch" title=""></div>
                 <div class="bg"></div>
             </label>
             <div class="langSwitcher">
-                <label for="langBar">Language</label>
+                <label for="langBar" data-i18n-handler="langLabel">Language</label>
                 <select name="langBar" id="langBar">
                     <option value="es">Spanish</option>
                 </select>
@@ -34,25 +34,25 @@
                     <h1>Alura Encrypter</h1>
                 </div>
                 <div class="workArea">
-                    <textarea name="encrypTxtBox" id="encrypTxtBox" cols="30" rows="10" placeholder="Inserte tu texto aqu&iacute;"></textarea>
-                    <span class="textInstruction"><i class="fa-solid fa-circle-exclamation"></i> Solo letras min&uacute;sculas y sin acentos</span>
-                    <input id="encryptBtn" type="button" class="btn btn-primary" value="Encriptar">
-                    <input id="decryptBtn" type="button" class="btn btn-secondary" value="Desencriptar">
+                    <textarea name="encrypTxtBox" id="encrypTxtBox" cols="30" rows="10" data-i18n-handler="textareaPlaceholder" placeholder="Inserte tu texto aqu&iacute;"></textarea>
+                    <div class="textInstruction"><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n-handler="userInstruction">Solo letras min&uacute;sculas y sin acentos</span></div>
+                    <button id="encryptBtn" class="btn btn-primary" data-i18n-handler="encryptBtn">Encriptar</button>
+                    <button id="decryptBtn" class="btn btn-secondary" data-i18n-handler="decryptBtn">Desencriptar</button>
                 </div>
             </div>
             <div id="secretBox">
-                <button id="clearMsgBtn" name="copyMsgBtn" class="btn btn-primary clearMsgBtn"><i class="fa-solid fa-eraser"></i>Clear Mensaje</button>
+                <button id="clearMsgBtn" name="copyMsgBtn" class="btn btn-primary clearMsgBtn" data-i18n-handler="clearMsgBtn"><i class="fa-solid fa-eraser"></i>Limpiar Mensaje</button>
                 <div id="secretDiv">
-                    <img src="assets/images/detective-searching.png" alt="Searching your message">
-                    <span>Ning&uacute;n texto fue encontrado</span> 
-                    <p>Ingresa el texto que desees encriptar o desencriptar</p>
+                    <img src="assets/images/detective-searching.png" alt="Searching your message" data-i18n-handler="imageDetectiveAlt">
+                    <span data-i18n-handler="titleDecrypted">Ning&uacute;n texto fue encontrado</span> 
+                    <p data-i18n-handler="descDecrypted">Ingresa el texto que desees encriptar o desencriptar</p>
                 </div>
                 <div class="copyMsgDiv">
-                    <button id="copyMsgBtn" name="copyMsgBtn" class="btn btn-secondary"><i class="fa-regular fa-clone"></i>Copiar Mensaje</button>
+                    <button id="copyMsgBtn" name="copyMsgBtn" class="btn btn-secondary" data-i18n-handler="copyMsgBtn"><i class="fa-regular fa-clone"></i>Copiar Mensaje</button>
                 </div>
             </div>
         </main>
-        <footer id="footer">
+        <footer id="footer" data-i18n-handler="footer">
             Este encriptador de texto fue elaborado por <a href="https://danespino.github.io" target="_blank">Dan Espino</a> 
         </footer>
     </div>

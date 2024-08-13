@@ -3,21 +3,19 @@ window.onload = () => {
     const currentTheme = getThemeModePreference();
     document.firstElementChild.setAttribute('data-theme', currentTheme);
     showSwitchStatus(currentTheme);
+    showLoader();
 }
 
 document.addEventListener('readystatechange', () => {
     const loaderDiv = document.getElementById("loader");
-    const workArea = document.getElementById("alura-encoder");
     const currentTheme = getThemeModePreference();
+
     loaderDiv.setAttribute('data-theme', currentTheme);
 
     if (document.readyState !== 'complete') {
-        workArea.style = "display: none";
-        loaderDiv.style = "display: flex";
+        showLoader(true);
     } else {
-        workArea.style = "display: flex";
-        document.body.style = "overflow: auto";
-        loaderDiv.style = "display: none";
+        showLoader();
     }
 });
 
@@ -30,14 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const copyMsgBtn = document.getElementById("copyMsgBtn");
     const secretDivDefault = document.getElementById("secretDiv").innerHTML;
     const darkModeBtn = document.getElementById("darkSwitch");
-    const loaderDiv = document.getElementById("loader");
     const langSwitcher = document.getElementById("langBar");
     const theme = {
         name: getThemeName(),
         themeMode: getThemeModePreference()
     }
     
-    loaderDiv.style = "display: flex";
+    showLoader(true);
     encryptBtn.disabled = true;
     decryptBtn.disabled = true;
     encryptBtn.classList.add("disabled");
@@ -102,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     langSwitcher.addEventListener('change', (event) => {
         const selectedLang = event.target.value;
         setPreference('lang', selectedLang);
+        loadLanguage(selectedLang);
     });
 
     window.addEventListener('scroll', () => {
@@ -199,5 +197,81 @@ const listAvailableLanguages = () => {
         document.getElementById("langBar").options.add(option);
     });
 
-    return true;
+    loadLanguage(preferedLang);
+    return;
+}
+
+const loadLanguage = (lang) => {
+    document.readyState = 'loading';
+    showLoader(true);
+    fetchLanguage(lang).then(translations => {
+        const elementsToTranslate = document.querySelectorAll('[data-i18n-handler]');
+        elementsToTranslate.forEach(element => {
+            const key = element.getAttribute('data-i18n-handler');
+            /* element.innerText = translations[key]; */
+            translatElement(element, translations[key]);
+        });
+    });
+    document.readyState = 'complete';
+    showLoader();
+}
+
+const showLoader = (show = false) => {
+    const loaderDiv = document.getElementById("loader");
+    const workArea = document.getElementById("alura-encoder");
+
+    if(show) {
+        workArea.style = "display: none";
+        document.body.style = "overflow: hidden";
+        loaderDiv.style = "display: flex";
+    } else {
+        workArea.style = "display: flex";
+        document.body.style = "overflow: auto";
+        loaderDiv.style = "display: none";
+    }
+    return;
+}
+
+const fetchLanguage = async (lang) => {
+    const response = await fetch(`./languages/${lang}.json`);
+    return await response.json();
+}
+
+const translatElement = (element, text) => {
+    console.log(element);
+    if (!element || text === undefined) return;
+
+    // Create a temporary div to hold the new content and evaluate text safely
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = text;
+
+    // Update only the text nodes without affecting other child elements
+    if(element.childNodes.length > 0) {
+        let textIndex = 0;
+        element.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                if (tempDiv.childNodes[textIndex]) {
+                    if(node.nodeValue !== ''){
+                        node.nodeValue = tempDiv.childNodes[textIndex].nodeValue;
+                        textIndex++;
+                    }   
+                }
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                // Recursively translate child elements
+                console.log(node);
+            }
+        });
+    } else {
+        element.setAttribute('placeholder', text);
+    }
+        
+    if(element.style.display !== 'none') {
+        // Repaint the element to reapply styles
+        element.style.display = 'none';
+        element.offsetHeight; // Trigger a reflow
+        element.style.display = '';
+    } else {
+        element.style.display = '';
+        element.style.display = 'none';
+    }
 }

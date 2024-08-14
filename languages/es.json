@@ -1,7 +1,8 @@
 {
     "website-title":            ".:: Encriptador de Texto Alura - Dan Espino ::.",
     "loadingDefaultStatus":     "Cargando",
-    "darkModeSwitch":           "",
+    "lightModeSwitch":          "Cambiar a modo claro",
+    "darkModeSwitch":           "Cambiar a modo oscuro",
     "langLabel":                "Idioma",
     "textareaPlaceholder":      "Inserte tu texto aquí",
     "userInstruction":          "Solo letras minúsculas y sin acentos",
@@ -11,5 +12,7 @@
     "descDecrypted":            "Ingresa el texto que desees encriptar o desencriptar",
     "clearMsgBtn":              "Limpiar Mensaje",
     "copyMsgBtn":               "Copiar Mensaje",
-    "footer":                   "Este encriptador de texto fue elaborado por"
+    "footer":                   "Este encriptador de texto fue elaborado por",
+    "copySuccess":              "Texto copiado con éxito al portapapeles!",
+    "copyFailed":               "Error en la copia del texto al portapapeles!"
 }

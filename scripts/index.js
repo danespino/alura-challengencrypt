@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setPreference('mode', newTheme);
         document.firstElementChild.setAttribute('data-theme', newTheme);
         theme.themeMode = newTheme;
-        newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
+        newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", translateString('lightModeSwitch', "Cambiar a modo claro")) : document.getElementsByClassName('slider')[0].setAttribute("title", translateString('darkModeSwitch', "Cambiar a modo oscuro"));
     });
 
     langSwitcher.addEventListener('change', (event) => {
@@ -132,11 +132,11 @@ const copyMsgToClipboard = async (message) => {
     try {
         await navigator.clipboard.writeText(textToCopy);
         alertMsgDiv.setAttribute("class", "alertBox success");
-        alertMsgDiv.innerText = "Texto copiado con exito!";
+        alertMsgDiv.innerText = translateString('copySuccess', "Texto copiado con éxito!");
     } catch (err) {
         console.error('Failed to copy text to the clipboard. Error: ', err);
         alertMsgDiv.classList.add = "alertBox error";
-        alertMsgDiv.innerText = "Error en la copia del texto al portapapeles!";
+        alertMsgDiv.innerText = translateString('copyFailed', "Error en la copia del texto al portapapeles!");
     }
     document.body.prepend(alertMsgDiv);
     setTimeout(() => {
@@ -243,7 +243,9 @@ const showLoader = (show = false) => {
 
 const fetchLanguage = async (lang) => {
     const response = await fetch(`./languages/${lang}.json`);
-    return await response.json();
+    const data = await response.json();
+    setPreference(`language_${lang}`, JSON.stringify(data));     // We will cache the fetched file for dynamic messages used in translateString
+    return data;
 }
 
 const translatElement = (element, text) => {
@@ -279,4 +281,9 @@ const translatElement = (element, text) => {
         element.style.display = '';
         element.style.display = 'none';
     }
+}
+
+const translateString = (key, defaultMessage) => {
+    const stringDictionary = JSON.parse(getPreference(`language_${getPreference('lang')}`));
+    return stringDictionary[key] || defaultMessage;
 }

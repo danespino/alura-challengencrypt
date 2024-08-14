@@ -1,7 +1,8 @@
 {
     "website-title":            ".:: Alura Encrypter - Dan Espino ::.",
     "loadingDefaultStatus":     "Loading",
-    "darkModeSwitch":           "",
+    "lightModeSwitch":          "Switch to light mode",
+    "darkModeSwitch":           "Switch to dark mode",
     "langLabel":                "Language",
     "textareaPlaceholder":      "Insert your text here",
     "userInstruction":          "Insert lowercase letters only. No special chars accepted.",
@@ -11,5 +12,7 @@
     "descDecrypted":            "Input the text you would like to encrypt or decrypt",
     "clearMsgBtn":              "Clear Message",
     "copyMsgBtn":               "Copy Message",
-    "footer":                   "Alura Encrypter was developed by"
+    "footer":                   "Alura Encrypter was developed by",
+    "copySuccess":              "Text copied successfully to the clipboard!",
+    "copyFailed":               "Error while copying text to the clipboard!"
 }

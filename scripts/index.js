@@ -81,7 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
         secretBox.replaceWith(secretDiv.cloneNode(true));
         clearMsgBtn.style = "display: none";
         copyMsgBtn.style = "display: none";
+        encryptBtn.disabled = true;
+        decryptBtn.disabled = true;
+        encryptBtn.classList.add("disabled");
+        decryptBtn.classList.add("disabled");
         loadLanguage(preferedLang);
+        location.reload();
     });
 
     copyMsgBtn.addEventListener('click', () => {

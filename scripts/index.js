@@ -20,13 +20,14 @@ document.addEventListener('readystatechange', () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    listAvailableLanguages();
     const textInput = document.getElementById("encrypTxtBox");
     const encryptBtn = document.getElementById("encryptBtn");
     const decryptBtn = document.getElementById("decryptBtn");
     const secretBox = document.getElementById("secretDiv");
     const clearMsgBtn = document.getElementById("clearMsgBtn");
     const copyMsgBtn = document.getElementById("copyMsgBtn");
-    const secretDivDefault = document.getElementById("secretDiv").innerHTML;
+    const secretDiv = secretBox.cloneNode(true);
     const darkModeBtn = document.getElementById("darkSwitch");
     const langSwitcher = document.getElementById("langBar");
     const theme = {
@@ -42,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     clearMsgBtn.style = "display: none";
     copyMsgBtn.style = "display: none";
     textInput.value = "";
-    listAvailableLanguages();
     
     textInput.addEventListener("input", () => {
         if (textInput.value.trim() === "") {
@@ -76,10 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     clearMsgBtn.addEventListener('click', () => {
+        let preferedLang = getPreference('lang') ?? 'es';
         textInput.value = "";
-        secretDiv.innerHTML = secretDivDefault;
+        secretBox.replaceWith(secretDiv.cloneNode(true));
         clearMsgBtn.style = "display: none";
         copyMsgBtn.style = "display: none";
+        loadLanguage(preferedLang);
     });
 
     copyMsgBtn.addEventListener('click', () => {
@@ -100,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const selectedLang = event.target.value;
         setPreference('lang', selectedLang);
         loadLanguage(selectedLang);
+        location.reload();
     });
 
     window.addEventListener('scroll', () => {
@@ -208,9 +211,10 @@ const loadLanguage = (lang) => {
         const elementsToTranslate = document.querySelectorAll('[data-i18n-handler]');
         elementsToTranslate.forEach(element => {
             const key = element.getAttribute('data-i18n-handler');
-            /* element.innerText = translations[key]; */
             translatElement(element, translations[key]);
         });
+    }).catch(err => {
+        console.error('Error loading language file:', err);
     });
     document.readyState = 'complete';
     showLoader();
@@ -238,7 +242,6 @@ const fetchLanguage = async (lang) => {
 }
 
 const translatElement = (element, text) => {
-    console.log(element);
     if (!element || text === undefined) return;
 
     // Create a temporary div to hold the new content and evaluate text safely
@@ -254,12 +257,9 @@ const translatElement = (element, text) => {
                     if(node.nodeValue !== ''){
                         node.nodeValue = tempDiv.childNodes[textIndex].nodeValue;
                         textIndex++;
-                    }   
-                }
-            } else if (node.nodeType === Node.ELEMENT_NODE) {
-                // Recursively translate child elements
-                console.log(node);
-            }
+                    }  
+                } 
+            } 
         });
     } else {
         element.setAttribute('placeholder', text);

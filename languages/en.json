@@ -1,5 +1,5 @@
 {
-    "website-title":            ".:: TextCryptor Alura - Dan Espino ::.",
+    "website-title":            ".:: Alura Encrypter - Dan Espino ::.",
     "loadingDefaultStatus":     "Loading",
     "darkModeSwitch":           "",
     "langLabel":                "Language",
@@ -11,6 +11,5 @@
     "descDecrypted":            "Input the text you would like to encrypt or decrypt",
     "clearMsgBtn":              "Clear Message",
     "copyMsgBtn":               "Copy Message",
-    "footer":                   "TextCryptor Alura developed by",
-    "":""
+    "footer":                   "Alura Encrypter was developed by"
 }

@@ -1,23 +1,41 @@
 window.onload = () => {
+    document.body.style.visibility = "visible";
     const currentTheme = getThemeModePreference();
     document.firstElementChild.setAttribute('data-theme', currentTheme);
     showSwitchStatus(currentTheme);
+    showLoader();
 }
 
+document.addEventListener('readystatechange', () => {
+    const loaderDiv = document.getElementById("loader");
+    const currentTheme = getThemeModePreference();
+
+    loaderDiv.setAttribute('data-theme', currentTheme);
+
+    if (document.readyState !== 'complete') {
+        showLoader(true);
+    } else {
+        showLoader();
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
+    listAvailableLanguages();
     const textInput = document.getElementById("encrypTxtBox");
     const encryptBtn = document.getElementById("encryptBtn");
     const decryptBtn = document.getElementById("decryptBtn");
     const secretBox = document.getElementById("secretDiv");
     const clearMsgBtn = document.getElementById("clearMsgBtn");
     const copyMsgBtn = document.getElementById("copyMsgBtn");
-    const secretDivDefault = document.getElementById("secretDiv").innerHTML;
+    const secretDiv = secretBox.cloneNode(true);
     const darkModeBtn = document.getElementById("darkSwitch");
+    const langSwitcher = document.getElementById("langBar");
     const theme = {
         name: getThemeName(),
         themeMode: getThemeModePreference()
     }
     
+    showLoader(true);
     encryptBtn.disabled = true;
     decryptBtn.disabled = true;
     encryptBtn.classList.add("disabled");
@@ -58,10 +76,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     clearMsgBtn.addEventListener('click', () => {
+        let preferedLang = getPreference('lang') ?? 'es';
         textInput.value = "";
-        secretDiv.innerHTML = secretDivDefault;
+        secretBox.replaceWith(secretDiv.cloneNode(true));
         clearMsgBtn.style = "display: none";
         copyMsgBtn.style = "display: none";
+        encryptBtn.disabled = true;
+        decryptBtn.disabled = true;
+        encryptBtn.classList.add("disabled");
+        decryptBtn.classList.add("disabled");
+        loadLanguage(preferedLang);
+        location.reload();
     });
 
     copyMsgBtn.addEventListener('click', () => {
@@ -75,7 +100,14 @@ document.addEventListener("DOMContentLoaded", () => {
         setPreference('mode', newTheme);
         document.firstElementChild.setAttribute('data-theme', newTheme);
         theme.themeMode = newTheme;
-        newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo claro") : document.getElementsByClassName('slider')[0].setAttribute("title", "Cambiar a modo oscuro");
+        newTheme === 'dark' ? document.getElementsByClassName('slider')[0].setAttribute("title", translateString('lightModeSwitch', "Cambiar a modo claro")) : document.getElementsByClassName('slider')[0].setAttribute("title", translateString('darkModeSwitch', "Cambiar a modo oscuro"));
+    });
+
+    langSwitcher.addEventListener('change', (event) => {
+        const selectedLang = event.target.value;
+        setPreference('lang', selectedLang);
+        loadLanguage(selectedLang);
+        location.reload();
     });
 
     window.addEventListener('scroll', () => {
@@ -100,11 +132,11 @@ const copyMsgToClipboard = async (message) => {
     try {
         await navigator.clipboard.writeText(textToCopy);
         alertMsgDiv.setAttribute("class", "alertBox success");
-        alertMsgDiv.innerText = "Texto copiado con exito!";
+        alertMsgDiv.innerText = translateString('copySuccess', "Texto copiado con éxito!");
     } catch (err) {
         console.error('Failed to copy text to the clipboard. Error: ', err);
         alertMsgDiv.classList.add = "alertBox error";
-        alertMsgDiv.innerText = "Error en la copia del texto al portapapeles!";
+        alertMsgDiv.innerText = translateString('copyFailed', "Error en la copia del texto al portapapeles!");
     }
     document.body.prepend(alertMsgDiv);
     setTimeout(() => {
@@ -152,4 +184,106 @@ const showSwitchStatus = (currentTheme) => {
     } 
     document.getElementsByClassName('slider')[0].setAttribute("title", strSwitch);
     return true;
+}
+
+const listAvailableLanguages = () => {
+    const languages = [
+        {name: "English", code: "en"},
+        {name: "Spanish", code: "es"}
+    ];
+
+    const preferedLang = getPreference('lang') ?? 'es';
+    const langOptionSelect = Array.from(document.getElementById("langBar").options).map(option => option.value);
+
+    languages.map((language) => {
+        if(langOptionSelect.includes(language.code)) return;
+
+        const option = document.createElement("option");
+        option.value = language.code;
+        option.text = language.name;
+        option.selected = language.code === preferedLang;
+        document.getElementById("langBar").options.add(option);
+    });
+
+    loadLanguage(preferedLang);
+    return;
+}
+
+const loadLanguage = (lang) => {
+    document.readyState = 'loading';
+    showLoader(true);
+    fetchLanguage(lang).then(translations => {
+        const elementsToTranslate = document.querySelectorAll('[data-i18n-handler]');
+        elementsToTranslate.forEach(element => {
+            const key = element.getAttribute('data-i18n-handler');
+            translatElement(element, translations[key]);
+        });
+    }).catch(err => {
+        console.error('Error loading language file:', err);
+    });
+    document.readyState = 'complete';
+    showLoader();
+}
+
+const showLoader = (show = false) => {
+    const loaderDiv = document.getElementById("loader");
+    const workArea = document.getElementById("alura-encoder");
+
+    if(show) {
+        workArea.style = "display: none";
+        document.body.style = "overflow: hidden";
+        loaderDiv.style = "display: flex";
+    } else {
+        workArea.style = "display: flex";
+        document.body.style = "overflow: auto";
+        loaderDiv.style = "display: none";
+    }
+    return;
+}
+
+const fetchLanguage = async (lang) => {
+    const response = await fetch(`./languages/${lang}.json`);
+    const data = await response.json();
+    setPreference(`language_${lang}`, JSON.stringify(data));     // We will cache the fetched file for dynamic messages used in translateString
+    return data;
+}
+
+const translatElement = (element, text) => {
+    if (!element || text === undefined) return;
+
+    // Create a temporary div to hold the new content and evaluate text safely
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = text;
+
+    // Update only the text nodes without affecting other child elements
+    if(element.childNodes.length > 0) {
+        let textIndex = 0;
+        element.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                if (tempDiv.childNodes[textIndex]) {
+                    if(node.nodeValue !== ''){
+                        node.nodeValue = tempDiv.childNodes[textIndex].nodeValue;
+                        textIndex++;
+                    }  
+                } 
+            } 
+        });
+    } else {
+        element.setAttribute('placeholder', text);
+    }
+        
+    if(element.style.display !== 'none') {
+        // Repaint the element to reapply styles
+        element.style.display = 'none';
+        element.offsetHeight; // Trigger a reflow
+        element.style.display = '';
+    } else {
+        element.style.display = '';
+        element.style.display = 'none';
+    }
+}
+
+const translateString = (key, defaultMessage) => {
+    const stringDictionary = JSON.parse(getPreference(`language_${getPreference('lang')}`));
+    return stringDictionary[key] || defaultMessage;
 }

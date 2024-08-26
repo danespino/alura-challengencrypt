@@ -41,3 +41,9 @@ const decodeText = (text) => {
 
     return decryptedText;
 }
+
+// This regex is in charge of detecting the chars not admitted to fire modal window to allow user to decide
+const detectForbidChars = (text) => {
+    const regex = /[A-ZÁÉÍÓÚÑÇáéíóúñ]/;
+    return regex.test(text);
+}

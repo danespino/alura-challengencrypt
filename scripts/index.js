@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     encryptBtn.addEventListener('click', () => {
         const textToEncrypt = textInput.value;
+        console.log(detectForbidChars(textToEncrypt));
         const encryptedText = encodeText(textToEncrypt);
         clearMsgBtn.style = "display: block";
         copyMsgBtn.style = "display: block";
@@ -287,3 +288,16 @@ const translateString = (key, defaultMessage) => {
     const stringDictionary = JSON.parse(getPreference(`language_${getPreference('lang')}`));
     return stringDictionary[key] || defaultMessage;
 }
+
+
+/* 
+    // This is a primitive version to model what will be next
+const encodeText = () => {
+    const inputText = document.getElementById('encrypTxtBox').value;
+    if (detectForbidChars(inputText)) {
+        showModal('No se permiten mayúsculas');
+        return;
+    }
+    const encodedText = encode(inputText);
+    document.getElementById('text-output').value = encodedText;
+} */

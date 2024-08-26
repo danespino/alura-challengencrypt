@@ -5,6 +5,7 @@ El desafio comprende elaborar un encriptador de texto sencillo para poner a prue
 
 ## Features
 - Encripta/Descrifra textos según el algoritmo presentado por Alura One.
+- Detecta Letras Mayúsculas y Acentuadas, informando al usuario que acción tomar. :new:
 - Cambio de Idioma (actualmente soportados: español e inglés).
 - Modo claro/oscuro
 

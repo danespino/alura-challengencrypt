@@ -270,6 +270,11 @@ select {
     color: var(--btn-secondary-text);
 }
 
+.btn-abort {
+    background-color: var(--error-color);
+    color: var(--btn-primary-text);
+}
+
 .disabled {
     cursor: not-allowed;
     opacity: 50%;
@@ -328,8 +333,14 @@ select {
   100% { opacity: 0; }
 }
 
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 0.65; }
+  100% { opacity: 1; }
+}
+
 .modal {
-    display: inline;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -337,7 +348,8 @@ select {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.85);
+    background-color: rgba(0,0,0,0.90);
+    animation: fadeIn 600ms;
 }
 
 .modalWindow {

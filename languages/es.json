@@ -14,5 +14,11 @@
     "copyMsgBtn":               "Copiar Mensaje",
     "footer":                   "Este encriptador de texto fue elaborado por",
     "copySuccess":              "Texto copiado con éxito al portapapeles!",
-    "copyFailed":               "Error en la copia del texto al portapapeles!"
+    "copyFailed":               "Error en la copia del texto al portapapeles!",
+    "modalTitle":               "AluraEncrypter - Advertencia",
+    "modalCloseBtn":            "Cerrar",
+    "modalMessage":             "Has insertado caracteres no admitidos. ¿Qué debo hacer?",
+    "modalAccept":              "Convierte caracteres",
+    "modalDecline":             "Deja los caracteres",
+    "modalAbort":               "Abortar Conversión"
 }

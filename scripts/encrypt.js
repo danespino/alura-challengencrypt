@@ -44,6 +44,34 @@ const decodeText = (text) => {
 
 // This regex is in charge of detecting the chars not admitted to fire modal window to allow user to decide
 const detectForbidChars = (text) => {
-    const regex = /[A-ZÁÉÍÓÚÑÇáéíóúñ]/;
+    const regex = /[A-ZÁÉÍÓÚÑÇáéíóúñç]/;
     return regex.test(text);
+}
+
+const convertForbidChars = (text) => {
+    const substitutions = [
+        {sub:'Á', letter: 'a'},
+        {sub:'É', letter: 'e'},
+        {sub:'Í', letter: 'i'},
+        {sub:'Ó', letter: 'o'},
+        {sub:'Ú', letter: 'u'},
+        {sub:'á', letter: 'a'},
+        {sub:'é', letter: 'e'},
+        {sub:'í', letter: 'i'},
+        {sub:'ó', letter: 'o'},
+        {sub:'ú', letter: 'u'},
+        {sub:'Ñ', letter: 'n'},
+        {sub:'ñ', letter: 'n'},
+        {sub:'Ç', letter: 'z'},
+        {sub:'ç', letter: 'z'}
+    ];
+
+    let decryptedText = text;
+
+    substitutions.forEach(({sub, letter}) => {
+        let regex = new RegExp(sub, 'g');       // construct regular expression to found all forbid chars
+        decryptedText = decryptedText.replace(regex, letter);   // Using replace and providing regex expression
+    });
+
+    return decryptedText;
 }

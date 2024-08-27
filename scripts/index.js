@@ -59,12 +59,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    encryptBtn.addEventListener('click', () => {
-        const textToEncrypt = textInput.value;
+    encryptBtn.addEventListener('click', async() => {
+        let textToEncrypt = textInput.value;
         let validText = detectForbidChars(textToEncrypt);
-        if (!validText) {
-            
-        }
+        if (validText) {
+            const userResponse = await showModal();
+           
+           // If user accepts we must substitute chars, if declines we leave the chars and convert msg, if aborts we exit conversion
+           switch(userResponse) {
+                case 'decline':
+                    break;
+                case 'accept':
+                        let text2Convert = String(textToEncrypt);
+                        text2Convert = text2Convert.toLocaleLowerCase();
+                        textToEncrypt = convertForbidChars(text2Convert);
+                    break;
+                case 'abort':
+                default:
+                        return;
+                    break;
+            }
+        } 
         const encryptedText = encodeText(textToEncrypt);
         clearMsgBtn.style = "display: block";
         copyMsgBtn.style = "display: block";
@@ -181,9 +196,9 @@ const showSwitchStatus = (currentTheme) => {
 
     if(currentTheme === 'dark') {
         switchBtn.checked = true;
-        strSwitch = "Cambiar a modo oscuro";
+        strSwitch = translateString('lightModeSwitch',"Cambiar a modo claro");
     } else {
-        strSwitch = "Cambiar a modo claro";
+        strSwitch = translateString('darkModeSwitch', "Cambiar a modo oscuro");
         switchBtn.checked = false;
     } 
     document.getElementsByClassName('slider')[0].setAttribute("title", strSwitch);
@@ -292,3 +307,41 @@ const translateString = (key, defaultMessage) => {
     return stringDictionary[key] || defaultMessage;
 }
 
+const showModal = () => {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('modal');
+        const acceptModal = document.getElementById('modalAccept');
+        const cancelModal = document.getElementById('modalDecline');
+        const closeModal = document.getElementById('modalClose');
+        const span = document.getElementById('modalCloseBtn');
+
+        modal.style.display = "inline";
+        document.body.style.overflow = "hidden";
+        span.innerHTML = "&times;";
+        span.setAttribute("title", translateString('modalCloseBtn', "Cerrar"));
+
+        span.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('abort');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('abort');
+        });
+
+        acceptModal.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('accept');
+        });
+
+        cancelModal.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('decline');
+        });
+    });
+}

@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearMsgBtn.style = "display: none";
     copyMsgBtn.style = "display: none";
     textInput.value = "";
+    document.getElementById("footer").style.visibility = "hidden";
     
     textInput.addEventListener("input", () => {
         if (textInput.value.trim() === "") {
@@ -135,11 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrollMaxPosition = document.body.scrollHeight - windowHeight;
         const animationPoint = scrollMaxPosition * 0.8;
         const footer = document.getElementById('footer');
+        const footerLinks = document.getElementsByClassName('authorLinks')[0];
 
         if (scrollPosition > animationPoint) {
             footer.style.opacity = "1";
+            footerLinks.style.display = "flex";
+            footer.style.visibility = "visible";
         } else {
             footer.style.opacity = "0";
+            footerLinks.style.display = "none";
+            footer.style.visibility = "hidden";
         }
     });
 });

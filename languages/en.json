@@ -12,7 +12,7 @@
     "descDecrypted":            "Input the text you would like to encrypt or decrypt",
     "clearMsgBtn":              "Clear Message",
     "copyMsgBtn":               "Copy Message",
-    "footer":                   "Alura Encrypter was developed by",
+    "footer":                   "Alura Encrypter was developed by Dan Espino",
     "copySuccess":              "Text copied successfully to the clipboard!",
     "copyFailed":               "Error while copying text to the clipboard!",
     "modalTitle":               "AluraEncrypter - Warning",

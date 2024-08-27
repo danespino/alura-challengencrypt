@@ -70,7 +70,8 @@ main {
 
 footer {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content:space-evenly;
     background-color: var(--footer-bgcolor);
     position: sticky;
     bottom: 0px;
@@ -90,6 +91,7 @@ footer:hover {
 }
 
 footer a:link {
+    display: block;
     margin:0 0.5% 0 0.5%;
     font-weight: 800;
     font-size: 1rem;
@@ -104,6 +106,19 @@ footer a:hover {
 
 footer a:visited {
     color: var(--footer-lnkvcolor);
+}
+
+footer div{
+    display: flex;
+    width: 45%;
+    margin: 1%;
+    flex-direction: row;
+    justify-content: center
+}
+
+footer .authorLinks a {
+    display: inline;
+    padding: 0% 2%;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -503,6 +518,10 @@ select {
 
 #secretDiv {
     margin-bottom: 10%;
+}
+
+#footer {
+    justify-content: end;
 }
 
 @media (min-width:481px) and (max-width:768px) {

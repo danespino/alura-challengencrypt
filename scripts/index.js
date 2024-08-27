@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearMsgBtn.style = "display: none";
     copyMsgBtn.style = "display: none";
     textInput.value = "";
+    document.getElementById("footer").style.visibility = "hidden";
     
     textInput.addEventListener("input", () => {
         if (textInput.value.trim() === "") {
@@ -59,8 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    encryptBtn.addEventListener('click', () => {
-        const textToEncrypt = textInput.value;
+    encryptBtn.addEventListener('click', async() => {
+        let textToEncrypt = textInput.value;
+        let validText = detectForbidChars(textToEncrypt);
+        if (validText) {
+            const userResponse = await showModal();
+           
+           // If user accepts we must substitute chars, if declines we leave the chars and convert msg, if aborts we exit conversion
+           switch(userResponse) {
+                case 'decline':
+                    break;
+                case 'accept':
+                        let text2Convert = String(textToEncrypt);
+                        text2Convert = text2Convert.toLocaleLowerCase();
+                        textToEncrypt = convertForbidChars(text2Convert);
+                    break;
+                case 'abort':
+                default:
+                        return;
+                    break;
+            }
+        } 
         const encryptedText = encodeText(textToEncrypt);
         clearMsgBtn.style = "display: block";
         copyMsgBtn.style = "display: block";
@@ -116,11 +136,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const scrollMaxPosition = document.body.scrollHeight - windowHeight;
         const animationPoint = scrollMaxPosition * 0.8;
         const footer = document.getElementById('footer');
+        const footerLinks = document.getElementsByClassName('authorLinks')[0];
 
         if (scrollPosition > animationPoint) {
             footer.style.opacity = "1";
+            footerLinks.style.display = "flex";
+            footer.style.visibility = "visible";
         } else {
             footer.style.opacity = "0";
+            footerLinks.style.display = "none";
+            footer.style.visibility = "hidden";
         }
     });
 });
@@ -177,9 +202,9 @@ const showSwitchStatus = (currentTheme) => {
 
     if(currentTheme === 'dark') {
         switchBtn.checked = true;
-        strSwitch = "Cambiar a modo oscuro";
+        strSwitch = translateString('lightModeSwitch',"Cambiar a modo claro");
     } else {
-        strSwitch = "Cambiar a modo claro";
+        strSwitch = translateString('darkModeSwitch', "Cambiar a modo oscuro");
         switchBtn.checked = false;
     } 
     document.getElementsByClassName('slider')[0].setAttribute("title", strSwitch);
@@ -286,4 +311,43 @@ const translatElement = (element, text) => {
 const translateString = (key, defaultMessage) => {
     const stringDictionary = JSON.parse(getPreference(`language_${getPreference('lang')}`));
     return stringDictionary[key] || defaultMessage;
+}
+
+const showModal = () => {
+    return new Promise((resolve) => {
+        const modal = document.getElementById('modal');
+        const acceptModal = document.getElementById('modalAccept');
+        const cancelModal = document.getElementById('modalDecline');
+        const closeModal = document.getElementById('modalClose');
+        const span = document.getElementById('modalCloseBtn');
+
+        modal.style.display = "inline";
+        document.body.style.overflow = "hidden";
+        span.innerHTML = "&times;";
+        span.setAttribute("title", translateString('modalCloseBtn', "Cerrar"));
+
+        span.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('abort');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('abort');
+        });
+
+        acceptModal.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('accept');
+        });
+
+        cancelModal.addEventListener('click', () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+            resolve('decline');
+        });
+    });
 }

@@ -58,6 +58,7 @@ body {
     font-size: 1rem;
     overflow: hidden;
     overflow: -moz-hidden-unscrollable;
+    position: relative;
 }
 
 main {
@@ -69,7 +70,8 @@ main {
 
 footer {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content:space-evenly;
     background-color: var(--footer-bgcolor);
     position: sticky;
     bottom: 0px;
@@ -89,6 +91,7 @@ footer:hover {
 }
 
 footer a:link {
+    display: block;
     margin:0 0.5% 0 0.5%;
     font-weight: 800;
     font-size: 1rem;
@@ -103,6 +106,19 @@ footer a:hover {
 
 footer a:visited {
     color: var(--footer-lnkvcolor);
+}
+
+footer div{
+    display: flex;
+    width: 45%;
+    margin: 1%;
+    flex-direction: row;
+    justify-content: center
+}
+
+footer .authorLinks a {
+    display: inline;
+    padding: 0% 2%;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -269,6 +285,11 @@ select {
     color: var(--btn-secondary-text);
 }
 
+.btn-abort {
+    background-color: var(--error-color);
+    color: var(--btn-primary-text);
+}
+
 .disabled {
     cursor: not-allowed;
     opacity: 50%;
@@ -327,6 +348,108 @@ select {
   100% { opacity: 0; }
 }
 
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 0.65; }
+  100% { opacity: 1; }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 400;       /*  We must use an inferior z-index to avoid overlapping with loader and avoid any unexpected bug */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.90);
+    animation: fadeIn 600ms;
+}
+
+.modalWindow {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: auto;
+    background-color: var(--terciary-color);
+    border-radius: 0.4rem;
+    overflow: auto;
+    border: 1px var(--bg-switch) solid;
+    width: 50%;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 1%;
+}
+
+.modalWindow .title {
+    display: flex;
+    font-size: 1.75rem;
+    line-height: 3rem;
+}
+
+.modalWindow .title img {
+    width: 48px;
+    height: 48px;
+}
+
+.modalWindow .closeBtn {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    right: 0;
+    top: 0;
+    font-size: 1.5rem;
+    margin: 0.5% 0.75%;
+    cursor: pointer;
+    border: 1px var(--error-color) solid;
+    background-color: var(--error-color);
+    border-radius: 0.4rem;
+    padding: 0.25% 1.5%;
+    color: var(--footer-lnkhcolor);
+    font-weight: 500;
+}
+
+.modalWindow .closeBtn:hover{
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+.modalWindow .content {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 1% 1%;
+    align-items: center;
+}
+
+.modalWindow .content img {
+    display: flex;
+    width: 150px;
+    height: 125px;
+    margin: 0.25% 2%;
+}
+
+.modalWindow .actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.modalWindow button {
+    border-radius: 0.4rem;
+    padding: 1% 2.5%;
+    margin: 0.25%;
+    cursor: pointer;
+}
+
+.modalWindow button:hover {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
 #loader {
     background-color: var(--bg-color);
     position:absolute;
@@ -337,7 +460,7 @@ select {
     z-index: 500;
     width: 100%;
     height: 100vh;
-    border: #CCC;
+    border: var(--footer-lnkvcolor);
     animation: fadeOut 600ms;
 }
 
@@ -346,7 +469,7 @@ select {
 }
 
 #loader span {
-    color: #CCC;
+    color: var(--footer-lnkvcolor);
     margin: 5%;
     font-family: 'Inter', sans-serif;
     font-size: 1.5rem;
@@ -395,6 +518,10 @@ select {
 
 #secretDiv {
     margin-bottom: 10%;
+}
+
+#footer {
+    justify-content: end;
 }
 
 @media (min-width:481px) and (max-width:768px) {

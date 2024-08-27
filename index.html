@@ -52,9 +52,33 @@
                 </div>
             </div>
         </main>
-        <footer id="footer" data-i18n-handler="footer">
-            Este encriptador de texto fue elaborado por <a href="https://danespino.github.io" target="_blank">Dan Espino</a> 
+        <footer id="footer">
+            <div data-i18n-handler="footer">
+                Este encriptador de texto fue elaborado por Dan Espino
+            </div>
+            <div class="authorLinks">
+                <a href="https://github.com/danespino" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/danespino91/?locale=en_US" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://danespino.github.io" target="_blank"><i class="fa-solid fa-briefcase"></i></a>
+            </div>
         </footer>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modalWindow">
+            <div class="title">
+                <img src="assets/images/DE.png"> <span data-i18n-handler="modalTitle">AluraEncrypter - Advertencia</span>
+                <span id="modalCloseBtn" class="closeBtn" data-i18n-handler="modalCloseBtn" title="">&times;</span>
+            </div>
+            <div class="content">
+                <img src="assets/images/detective-alert.png">
+                <p data-i18n-handler="modalMessage">Has insertado caracteres no admitidos. ¿Qu&eacute; debo hacer?</p>
+            </div>
+            <div class="actions">
+                <button id="modalAccept" class="btn-primary" data-i18n-handler="modalAccept">Convierte caracteres</button>
+                <button id="modalDecline" class="btn-secondary" data-i18n-handler="modalDecline">Deja los caracteres</button>
+                <button id="modalClose" class="btn-abort" data-i18n-handler="modalAbort">Abortar Conversi&oacute;n</button>
+            </div>
+        </div>
     </div>
     <script defer src="scripts/encrypt.js"></script>
 </body>

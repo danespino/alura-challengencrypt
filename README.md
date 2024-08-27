@@ -12,6 +12,11 @@ El desafio comprende elaborar un encriptador de texto sencillo para poner a prue
 ## Screenshots
 A continuación, unas imágenes que muestran el resultado actual de la última release. 
 
+**Modal de Advertencia**
+![](/documentation/images/warnmodal.png)
+
+**`Ahora puedes tener la opción de convertir el caracter prohibido por el algoritmo de Alura, puedes omitir la mayúscula o letra tildada. Así como abortar la conversión y adaptar el mensaje como te resulte más conveniente.`**
+
 **Modo Claro**
 ![](/documentation/images/lightmode.png)
 **Modo Oscuro**
